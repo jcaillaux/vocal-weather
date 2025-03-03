@@ -3,6 +3,7 @@
 
 import 'bootstrap/dist/css/bootstrap.css';
 import { useEffect } from 'react';
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 
 export default function RootLayout({
   children,
@@ -16,7 +17,25 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+      <Navbar expand="lg" className="navbar navbar-expand-lg navbar-dark bg-dark py-0">
+          <Container>
+            <Navbar.Brand href="/">WeatherWave</Navbar.Brand>
+           
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+              <Nav className="me-0">
+                <Nav.Link href="/docuser">Documentation</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+        
+        <main className="container py-0">
+          {children}
+        </main>
+      </body>
+      
     </html>
   );
 }
