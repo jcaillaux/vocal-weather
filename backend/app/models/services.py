@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from ..services.speech_service import STTService
-from ..services.nergem import NERService
+from ..services.ner import NERService
 from ..services.geocoding import GEOCodingService
 from ..services.weather import OpenMeteoService
 from ..services.dparser import DATEParserService
