@@ -66,7 +66,8 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-
+backend/app/.cache.sqlite
+backend/app/audio/
 # Flask stuff:
 instance/
 .webassets-cache
