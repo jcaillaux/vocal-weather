@@ -1,6 +1,6 @@
-from fastapi import FastAPI, HTTPException, Request, UploadFile, File, Form, Depends, Body
-from typing import Annotated, Optional
-from pydantic import BaseModel, ValidationError, Field
+from fastapi import FastAPI, UploadFile, File, Form, Depends
+from typing import Annotated
+
 from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 import shutil
@@ -12,7 +12,7 @@ from contextlib import asynccontextmanager
 from .models.requests import UserLogin, TextQuery
 from .core.utils import get_client_ip
 
-from .services.speech_service import STTService, NoSpeechDetectedError, TranscriptionCanceledError, SpeechTranscriptionError
+from .services.speech_service import NoSpeechDetectedError, TranscriptionCanceledError, SpeechTranscriptionError
 
 from .models.services import ServiceStack
 
@@ -153,14 +153,14 @@ async def upload_audio(audio : Annotated[UploadFile, File(media_type='audio/wav'
             'error'   : type(e).__name__,
             'message' : str(e) 
         })
-    #try :
-    #    horizon = services_.date.extract_date(entities['Date'] if len(entities['Date']) > 0 else entities['Time'])
-    #    print(horizon)
-    #except Exception as e :
-    #    return JSONResponse(content={
-    #        'error'   : type(e).__name__,
-    #        'message' : str(e) 
-    #   })
+    try :
+        horizon = services_.date.extract_date(entities['Date'] if len(entities['Date']) > 0 else entities['Time'])
+        print(horizon)
+    except Exception as e :
+        return JSONResponse(content={
+            'error'   : type(e).__name__,
+            'message' : str(e) 
+       })
     try :
         update_query(task_id=task_id, status='METEOPending')
         insert_new_meteo(task_id=task_id)
